@@ -1,0 +1,49 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 20_spelling.dpatch by Sandro Tosi <morph@debian.org>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: Fix the "compatability/compatibility" spelling error
+
+@DPATCH@
+diff -urNad pyopenssl~/src/ssl/connection.c pyopenssl/src/ssl/connection.c
+--- pyopenssl~/src/ssl/connection.c	2009-11-13 16:36:16.000000000 +0100
++++ pyopenssl/src/ssl/connection.c	2010-01-27 21:43:13.014236702 +0100
+@@ -326,7 +326,7 @@
+ method again with the SAME buffer.\n\
+ \n\
+ @param buf: The string to send\n\
+-@param flags: (optional) Included for compatability with the socket\n\
++@param flags: (optional) Included for compatibility with the socket\n\
+               API, the value is ignored\n\
+ @return: The number of bytes written\n\
+ ";
+@@ -367,7 +367,7 @@
+ has been sent.\n\
+ \n\
+ @param buf: The string to send\n\
+-@param flags: (optional) Included for compatability with the socket\n\
++@param flags: (optional) Included for compatibility with the socket\n\
+               API, the value is ignored\n\
+ @return: The number of bytes written\n\
+ ";
+@@ -416,7 +416,7 @@
+ method again with the SAME buffer.\n\
+ \n\
+ @param bufsiz: The maximum number of bytes to read\n\
+-@param flags: (optional) Included for compatability with the socket\n\
++@param flags: (optional) Included for compatibility with the socket\n\
+               API, the value is ignored\n\
+ @return: The string read from the Connection\n\
+ ";
+diff -urNad pyopenssl~/src/util.h pyopenssl/src/util.h
+--- pyopenssl~/src/util.h	2009-11-13 16:36:16.000000000 +0100
++++ pyopenssl/src/util.h	2010-01-27 21:43:13.014236702 +0100
+@@ -18,7 +18,7 @@
+ 
+ /*
+  * pymemcompat written by Michael Hudson and lets you program to the
+- * Python 2.3 memory API while keeping backwards compatability.
++ * Python 2.3 memory API while keeping backwards compatibility.
+  */
+ #include "pymemcompat.h"
+ 
