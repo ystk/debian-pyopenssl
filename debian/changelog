@@ -1,3 +1,12 @@
+pyopenssl (0.10-1+squeeze1) squeeze-security; urgency=high
+
+  * Non-maintainer upload by the Security Team.
+  * Add 30_CVE-2013-4314.dpatch.
+    CVE-2013-4314: Fix hostname check bypassing vulnerability with server
+    certificates that have a null byte in the subjectAltName. (Closes: #722055)
+
+ -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 21 Sep 2013 17:58:58 +0200
+
 pyopenssl (0.10-1) unstable; urgency=low
 
   * New upstream release
