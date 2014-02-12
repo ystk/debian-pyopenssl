@@ -3,22 +3,19 @@ Section: python
 Priority: optional
 Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
 Uploaders: Sandro Tosi <morph@debian.org>
-Build-Depends: debhelper (>= 5.0.37.2), python-all-dev (>= 2.5.4-1~), python-all-dbg (>= 2.5.4-1~), python-support (>= 0.6.4), libssl-dev (>= 0.9.8), dpatch, tex4ht, w3m, texlive-latex-base, texlive-latex-recommended
-Standards-Version: 3.8.4
-Homepage: http://pyopenssl.sourceforge.net/
+Build-Depends: debhelper (>= 5.0.37.2), python-all-dev (>= 2.5.4-1~), python-all-dbg (>= 2.5.4-1~), python3-all-dev, python3-all-dbg, python-support (>= 0.6.4), libssl-dev (>= 0.9.8), tex4ht, w3m, texlive-latex-base, texlive-latex-recommended, openssl
+Standards-Version: 3.9.3
+Homepage: http://launchpad.net/pyopenssl
 Vcs-Svn: svn://svn.debian.org/python-modules/packages/pyopenssl/trunk/
 Vcs-Browser: http://svn.debian.org/viewsvn/python-modules/packages/pyopenssl/trunk/
 XS-Python-Version: all
+X-Python3-Version: >= 3.2
 
 Package: python-openssl
 Architecture: any
 Depends: ${python:Depends}, ${shlibs:Depends}, ${misc:Depends}
-Provides: ${python:Provides}, python-pyopenssl
 Suggests: python-openssl-doc, python-openssl-dbg
-Replaces: python-pyopenssl, python2-pyopenssl, python2.3-pyopenssl (<< 0.6-2.3), python2.4-pyopenssl (<< 0.6-2.3)
-Conflicts: python-pyopenssl (<< 0.6-3), python2-pyopenssl, python2.3-pyopenssl (<< 0.6-2.3), python2.4-pyopenssl (<< 0.6-2.3)
-XB-Python-Version: ${python:Versions}
-Description: Python wrapper around the OpenSSL library
+Description: Python 2 wrapper around the OpenSSL library
  High-level wrapper around a subset of the OpenSSL library, includes
  .
    * SSL.Connection objects, wrapping the methods of Python's portable
@@ -34,7 +31,7 @@ Package: python-openssl-doc
 Section: doc
 Architecture: all
 Depends: ${misc:Depends}
-Suggests: python-openssl
+Suggests: python-openssl, python3-openssl
 Description: Python wrapper around the OpenSSL library (documentation package)
  High-level wrapper around a subset of the OpenSSL library, includes
  .
@@ -54,7 +51,7 @@ Priority: extra
 Section: debug
 Architecture: any
 Depends: ${misc:Depends}, python-openssl (= ${binary:Version}), python-dbg, ${shlibs:Depends}
-Description: Python wrapper around the OpenSSL library (debug extension)
+Description: Python 2 wrapper around the OpenSSL library (debug extension)
  High-level wrapper around a subset of the OpenSSL library, includes
  .
    * SSL.Connection objects, wrapping the methods of Python's portable
@@ -67,3 +64,41 @@ Description: Python wrapper around the OpenSSL library (debug extension)
  corresponding function in the OpenSSL library.
  .
  This package contains the debug extension for python-openssl.
+
+Package: python3-openssl
+Architecture: any
+Depends: ${python3:Depends}, ${shlibs:Depends}, ${misc:Depends}
+Suggests: python-openssl-doc, python3-openssl-dbg
+Description: Python 3 wrapper around the OpenSSL library
+ High-level wrapper around a subset of the OpenSSL library, includes
+ .
+   * SSL.Connection objects, wrapping the methods of Python's portable
+     sockets
+   * Callbacks written in Python
+   * Extensive error-handling mechanism, mirroring OpenSSL's error
+     codes
+ .
+ A lot of the object methods do nothing more than calling a
+ corresponding function in the OpenSSL library.
+ .
+ This package contains the Python 3 version of pyopenssl.
+
+Package: python3-openssl-dbg
+Priority: extra
+Section: debug
+Architecture: any
+Depends: ${misc:Depends}, python3-openssl (= ${binary:Version}), python3-dbg, ${shlibs:Depends}
+Description: Python 3 wrapper around the OpenSSL library (debug extension)
+ High-level wrapper around a subset of the OpenSSL library, includes
+ .
+   * SSL.Connection objects, wrapping the methods of Python's portable
+     sockets
+   * Callbacks written in Python
+   * Extensive error-handling mechanism, mirroring OpenSSL's error
+     codes
+ .
+ A lot of the object methods do nothing more than calling a
+ corresponding function in the OpenSSL library.
+ .
+ This package contains the debug extension for python3-openssl.
+

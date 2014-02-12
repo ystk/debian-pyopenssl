@@ -1,0 +1,3 @@
+10_fix_doc_buildsystem.patch
+disable_test_set_default_verify_paths.patch
+CVE-2013-4314.patch

@@ -1,3 +1,90 @@
+pyopenssl (0.13-2+deb7u1) wheezy-security; urgency=high
+
+  * Non-maintainer upload by the Security Team.
+  * Add CVE-2013-4314.patch patch.
+    CVE-2013-4314: Fix hostname check bypassing vulnerability with server
+    certificates that have a null byte in the subjectAltName. (Closes: #722055)
+
+ -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 16 Sep 2013 19:20:53 +0200
+
+pyopenssl (0.13-2) unstable; urgency=low
+
+  [ Barry Warsaw ]
+  * Enable the Python 3 version of the package; Closes: #669301
+
+  [ Sandro Tosi ]
+  * Fix several omissions for py3k packages introduction
+  * debian/control
+    - bump Standards-Version to 3.9.3 (no changes needed)
+  * debian/rules
+    - remove leftover from build process, so the package can be built twice in a
+      row; thanks to Jakub Wilk for the report; Closes: #671191
+
+ -- Sandro Tosi <morph@debian.org>  Sat, 05 May 2012 17:30:52 +0200
+
+pyopenssl (0.13-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Sandro Tosi <morph@debian.org>  Sun, 11 Sep 2011 16:46:29 +0200
+
+pyopenssl (0.13~a1-1) unstable; urgency=low
+
+  * New upstream (alpha) release
+  * debian/patches/support_openssl_1.0
+    - removed, fix upstream
+  * debian/patches/disable_test_set_default_verify_paths.patch
+    - disable a test trying to connect to the web
+  * debian/rules
+    - fix build* targets
+  * debian/control
+    - drop Provides and XB-P-V fields from bin pkg
+
+ -- Sandro Tosi <morph@debian.org>  Mon, 15 Aug 2011 18:44:39 +0200
+
+pyopenssl (0.12-1) unstable; urgency=low
+
+  * New upstream release
+  * debian/watch
+    - point to Pypi instead of launchpad
+  * debian/copyright
+    - updated packaging copyright years
+    - updated upstream license to Apache 2.0
+  * debian/control
+    - remove Provides/Conflicts/Replaces for python-pyopenssl
+    - bump Standards-Version to 3.9.2 (no changes needed)
+  * debian/source/format
+    - converted to 3.0 (quilt)
+  * Converted from dpatch to quilt
+  * debian/patches/support_openssl_1.0
+    - support OpenSSL 1.0 and the removal of SSLv2 methods; Closes: #622154
+
+ -- Sandro Tosi <morph@debian.org>  Mon, 30 May 2011 14:55:33 +0200
+
+pyopenssl (0.11-1) experimental; urgency=low
+
+  * New upstream release
+  * debian/watch
+    - updated to use launchpad
+
+ -- Sandro Tosi <morph@debian.org>  Thu, 04 Nov 2010 23:00:23 +0100
+
+pyopenssl (0.11~a2-1) experimental; urgency=low
+
+  * New (alpha) upstream release
+  * debian/{control, copyright}
+    - updated upstream project website location; thanks to Jonathan Davies for
+      the report; Closes: #567654
+  * debian/copyright
+    - updated upstream copyright years
+  * debian/patches/20_spelling.dpatch
+    - removed, merged upstream
+  * debian/control
+    - bump Standards-Version to 3.9.1 (no changes needed)
+    - added 'openssl' to b-d, needed to run unit tests
+
+ -- Sandro Tosi <morph@debian.org>  Mon, 25 Oct 2010 21:11:45 +0200
+
 pyopenssl (0.10-1) unstable; urgency=low
 
   * New upstream release

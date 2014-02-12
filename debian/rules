@@ -3,11 +3,13 @@
 # Uncomment this to turn on verbose mode. 
 #export DH_VERBOSE=1
 
-include /usr/share/dpatch/dpatch.make
+PY2VERS := $(shell pyversions -r -v)
+PY3VERS := $(shell py3versions -r -v)
+PYVERS := $(PY2VERS) $(PY3VERS)
 
-PYVERS := $(shell pyversions -r -v)
-
-build: patch build-stamp
+build: build-arch build-indep
+build-arch: build-stamp
+build-indep: build-stamp
 build-stamp:
 	dh_testdir
 
@@ -19,7 +21,7 @@ build-stamp:
 
 	# run tests
 	-for py in $(PYVERS); do  \
-	    for test in test/test*; do \
+	    for test in OpenSSL/test/test*; do \
 	        echo "running $$test for python$$py ..."; \
 	        PYTHONPATH=build/lib.$(DEB_BUILD_ARCH_OS)-$(shell uname -m)-$$py python$$py $$test; \
 	        PYTHONPATH=`ls -d build/lib_d.*-$$py || ls -d build/lib.*-$$py-pydebug` python$$py-dbg $$test; \
@@ -31,7 +33,7 @@ build-stamp:
 
 	touch build-stamp
 
-clean: unpatch
+clean:
 	dh_testdir
 	dh_testroot
 
@@ -44,6 +46,8 @@ clean: unpatch
 
 	$(MAKE) -C doc clean
 
+	rm -rf *.key *.pem tmp*
+
 	dh_clean build-stamp version.pyc
 
 install: DH_OPTIONS=
@@ -54,11 +58,18 @@ install: build
 	dh_installdirs
 
 	set -e; \
-	for py in $(PYVERS); do \
+	for py in $(PY2VERS); do \
 	    echo "installing for python$$py ..."; \
  	    python$$py setup.py install --root=$(CURDIR)/debian/python-openssl --install-layout=deb; \
 	    echo "installing for python$$py-dbg ..."; \
 	    python$$py-dbg setup.py install --root=$(CURDIR)/debian/python-openssl-dbg --install-layout=deb; \
+ 	done
+	set -e; \
+	for py in $(PY3VERS); do \
+	    echo "installing for python$$py ..."; \
+ 	    python$$py setup.py install --root=$(CURDIR)/debian/python3-openssl --install-layout=deb; \
+	    echo "installing for python$$py-dbg ..."; \
+	    python$$py-dbg setup.py install --root=$(CURDIR)/debian/python3-openssl-dbg --install-layout=deb; \
  	done
 	find debian/python-openssl-dbg ! -type d ! -name '*_d.so' | xargs rm -f
 	find debian/python-openssl-dbg -depth -empty -exec rmdir {} \;
@@ -74,6 +85,7 @@ binary-indep: build install
 	dh_compress -i
 	dh_fixperms -i
 	dh_pysupport -i
+	dh_python3 -i
 	dh_installdeb -i
 	dh_gencontrol -i
 	dh_md5sums -i
@@ -87,11 +99,13 @@ binary-arch: build install
 	dh_installexamples -a
 	dh_installchangelogs ChangeLog -a
 	dh_strip -ppython-openssl --dbg-package=python-openssl-dbg
+	dh_strip -ppython3-openssl --dbg-package=python3-openssl-dbg
 	rm -rf debian/python-openssl-dbg/usr/share/doc/python-openssl-dbg
 	ln -s python-openssl debian/python-openssl-dbg/usr/share/doc/python-openssl-dbg
 	dh_compress -a
 	dh_fixperms -a
 	dh_pysupport -a
+	dh_python3 -a
 	dh_makeshlibs -a
 	dh_installdeb -a
 	dh_shlibdeps -a
