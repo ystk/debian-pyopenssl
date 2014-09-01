@@ -1,11 +1,74 @@
-pyopenssl (0.13-2+deb7u1) wheezy-security; urgency=high
+pyopenssl (0.14-1) unstable; urgency=medium
 
-  * Non-maintainer upload by the Security Team.
+  * New upstream release; Closes: #751144
+  * debian/control
+    - update Homepage field; thanks to Slavko for the report; Closes: #751893
+    - update b-d as per new upstream code
+    - packages now are Arch:all
+  * debian/copyright
+    - switch to DEP-5 format
+    - updated to new upsteam release
+  * debian/patches/*
+    - removed no longer applyable patches, refresh the remaining one
+  * debian/README.source
+    - removed, long outdated
+  * Build and install doc with Sphinx
+  * debian/{control, *-dbg.install}
+    - removed dbg package, no longer created
+  * debian/patches/bbff8b97da488d19d3a26f6eda5f83fc88ad430c.patch
+    - fixes test_wantWriteError error
+  * debian/rules
+    - run test correctly for a pure Python module
+
+ -- Sandro Tosi <morph@debian.org>  Mon, 18 Aug 2014 20:05:04 +0100
+
+pyopenssl (0.13.1-2) unstable; urgency=medium
+
+  * debian/control
+    - add texlive-fonts-recommended to b-d, fixing a FTBFS; thanks to Daniel
+      Schepler for the report and Hideki Yamane for the patch; Closes: #739076
+    - switch me to Maintainer (team to Uploaders)
+  * Switch to dh_python2
+  * debian/{compat, control}
+    - bump compat to 9
+
+ -- Sandro Tosi <morph@debian.org>  Fri, 21 Feb 2014 20:43:50 +0100
+
+pyopenssl (0.13.1-1) unstable; urgency=low
+
+  [ Jakub Wilk ]
+  * Use canonical URIs for Vcs-* fields.
+ 
+  [ Sandro Tosi ]
+  * New upstream release
+    - debian/patches/CVE-2013-4314.patch removed, merged upstream
+  * Acknowledge NMU; thanks Salvatore Bonaccorso; Closes: #722055
+  * debian/patches/bts733366_make_symbol_optional.patch
+    - fix a FTBFS by making SSL_OP_MSIE_SSLV2_RSA_PADDING optional; thanks to
+      David Suárez for the report and to Mehdi Abaakouk for the patch;
+      Closes: #733366
+  * debian/control
+    - bump Standards-Version to 3.9.5 (no changes needed)
+  * debian/copyright
+    - bump packaging copyright years
+
+ -- Sandro Tosi <morph@debian.org>  Sun, 12 Jan 2014 22:15:57 +0100
+
+pyopenssl (0.13-3.1) experimental; urgency=low
+
+  * Non-maintainer upload.
   * Add CVE-2013-4314.patch patch.
     CVE-2013-4314: Fix hostname check bypassing vulnerability with server
     certificates that have a null byte in the subjectAltName. (Closes: #722055)
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 16 Sep 2013 19:20:53 +0200
+ -- Salvatore Bonaccorso <carnil@debian.org>  Sun, 15 Sep 2013 16:59:07 +0200
+
+pyopenssl (0.13-3) experimental; urgency=low
+
+  * debian/{control, rules}
+    - migrate to dh sequences, implicitly Closes: #675414
+
+ -- Sandro Tosi <morph@debian.org>  Wed, 29 Aug 2012 22:45:02 +0200
 
 pyopenssl (0.13-2) unstable; urgency=low
 

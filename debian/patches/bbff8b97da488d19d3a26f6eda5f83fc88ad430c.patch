@@ -1,0 +1,35 @@
+From bbff8b97da488d19d3a26f6eda5f83fc88ad430c Mon Sep 17 00:00:00 2001
+From: Jean-Paul Calderone <exarkun@twistedmatrix.com>
+Date: Sat, 22 Mar 2014 14:20:30 -0400
+Subject: [PATCH] Only write one byte at a time and try to write many more
+ bytes overall.
+
+Hopefully this addresses FreeBSD and Gentoo issues with this test.
+---
+ OpenSSL/test/test_ssl.py | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
+
+diff --git a/OpenSSL/test/test_ssl.py b/OpenSSL/test/test_ssl.py
+index a6f0127..1f62e49 100644
+--- a/OpenSSL/test/test_ssl.py
++++ b/OpenSSL/test/test_ssl.py
+@@ -1911,9 +1911,13 @@ def test_wantWriteError(self):
+         """
+         client_socket, server_socket = socket_pair()
+         # Fill up the client's send buffer so Connection won't be able to write
+-        # anything.
+-        msg = b"x" * 512
+-        for i in range(2048):
++        # anything.  Only write a single byte at a time so we can be sure we
++        # completely fill the buffer.  Even though the socket API is allowed to
++        # signal a short write via its return value it seems this doesn't
++        # always happen on all platforms (FreeBSD and OS X particular) for the
++        # very last bit of available buffer space.
++        msg = b"x"
++        for i in range(1024 * 1024 * 4):
+             try:
+                 client_socket.send(msg)
+             except error as e:
+-- 
+2.0.3
+

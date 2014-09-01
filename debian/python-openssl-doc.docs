@@ -1,3 +1,2 @@
-doc/pyOpenSSL.ps
-doc/pyOpenSSL.txt
-doc/html
+doc/_build/html
+OpenSSL/RATIONALE

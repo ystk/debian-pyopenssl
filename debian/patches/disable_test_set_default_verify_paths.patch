@@ -1,10 +1,8 @@
 Description: disable test_set_default_verify_paths since it tries to access the web
 
-Index: pyopenssl-0.13~a1/OpenSSL/test/test_ssl.py
-===================================================================
---- pyopenssl-0.13~a1.orig/OpenSSL/test/test_ssl.py	2011-08-15 18:23:31.612351434 +0200
-+++ pyopenssl-0.13~a1/OpenSSL/test/test_ssl.py	2011-08-15 18:24:44.646743564 +0200
-@@ -661,21 +661,22 @@
+--- a/OpenSSL/test/test_ssl.py
++++ b/OpenSSL/test/test_ssl.py
+@@ -918,21 +918,22 @@ class ContextTests(TestCase, _LoopbackMi
              # internet which has such a certificate.  Connecting to the network
              # in a unit test is bad, but it's the only way I can think of to
              # really test this. -exarkun
@@ -22,7 +20,7 @@ Index: pyopenssl-0.13~a1/OpenSSL/test/test_ssl.py
 -            clientSSL = Connection(context, client)
 -            clientSSL.set_connect_state()
 -            clientSSL.do_handshake()
--            clientSSL.send('GET / HTTP/1.0\r\n\r\n')
+-            clientSSL.send(b"GET / HTTP/1.0\r\n\r\n")
 -            self.assertTrue(clientSSL.recv(1024))
 +            #context = Context(SSLv3_METHOD)
 +            #context.set_default_verify_paths()
@@ -35,7 +33,7 @@ Index: pyopenssl-0.13~a1/OpenSSL/test/test_ssl.py
 +            #clientSSL = Connection(context, client)
 +            #clientSSL.set_connect_state()
 +            #clientSSL.do_handshake()
-+            #clientSSL.send('GET / HTTP/1.0\r\n\r\n')
++            #clientSSL.send(b"GET / HTTP/1.0\r\n\r\n")
 +            #self.assertTrue(clientSSL.recv(1024))
  
  
